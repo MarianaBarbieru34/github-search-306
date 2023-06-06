@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# GitHub Search Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## User Story
 
-## Available Scripts
+As a user I should be able to search for information using the GitHub API.
 
-In the project directory, you can run:
+## Acceptance Criteria
 
-### `npm start`
+> User is presented with a form that has 2 buttons: `Search by organisation` and `Search by username`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> User is present with a text input to enter an organisation name or a username depending on which button they have clicked on
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> When the user clicks on the `Submit` button the user is presented with a list of repositories
 
-### `npm test`
+> When the user submit an empty form the user is presented with an error message "Please enter valid organisation" if the user has selected `Search by organisation`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> When the user submit an empty form the user is presented with an error message "Please enter valid username" if the user has selected `Search by username`
 
-### `npm run build`
+> Use the link `https://api.github.com/orgs/{organisationName}/repos` for a search by organisation name
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> Use the link `https://api.github.com/users/{username}/repos` for a search by username name
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> If user selects `Search by organisation` then the placeholder label should read "Enter organisation"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> If user selects `Search by username` then the placeholder label should read "Enter username"
 
-### `npm run eject`
+> Repositories should be presented as many cards keeping in mind responsive layouts
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> Each repository must be presented as a card with the following information: Repo name, Repo url, Description, User avatar
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> If the number of repositories returned from the API is 0 then the user should be presented with an alert `"No repositories found."`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Design Guide
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![desktop design guide](./desktop-design.png)
 
-## Learn More
+![mobile design guide](./mobile-design.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. > Navigate to your `coding_bootcamp` workspace:
 
-### Code Splitting
+```
+cd ~/coding_bootcamp
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. > Create a react project using the `create-react-app` script and use your own app name:
 
-### Analyzing the Bundle Size
+```
+npx create-react-app your-app-name
+cd your-react-app
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. > Create a repository in [GitHub](https://github.com/new) and enter the "Repository name" as the same name as your react app.
 
-### Making a Progressive Web App
+4. > In the terminal within your react app enter the commands provided by GitHub. The first command points your local repository to the remote GitHub, the second command sets your branch as `main` and the last command pushes all your local changes to the remote repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+git remote add origin git@github.com:YOUR_GITHUB_USERNAME/your-app-name.git
+git branch -M main
+git push -u origin main
+```
 
-### Advanced Configuration
+5. > Once you refresh your GitHub page on the web browser you will see all your local files in GitHub.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+6. > You can now proceed to work locally and add commit and push code regularly during development
 
-### Deployment
+## Resources
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- CSS framework: [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- Colour palette: [coolors](https://coolors.co/)
+- Icons: [font-awesome icons](https://fontawesome.com/icons) | [CDN](https://cdnjs.com/libraries/font-awesome)
+- [React docs](https://beta.reactjs.org/)

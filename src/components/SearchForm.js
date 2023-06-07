@@ -1,4 +1,5 @@
 import { useState } from "react";
+import classNames from "classnames";
 import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -7,9 +8,11 @@ import Form from "react-bootstrap/Form";
 export const SearchForm = ({ setUrl }) => {
   const [mode, setMode] = useState("organisation");
   const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState("");
 
   const handleButtonGroupClick = ({ currentTarget }) => {
     setSearchTerm("");
+    setError("");
     setMode(currentTarget.name);
   };
 
@@ -20,12 +23,17 @@ export const SearchForm = ({ setUrl }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const url =
-      mode === "organisation"
-        ? `https://api.github.com/orgs/${searchTerm}/repos`
-        : `https://api.github.com/users/${searchTerm}/repos`;
+    if (!searchTerm) {
+      setError(`Please enter a valid ${mode}`);
+    } else {
+      const url =
+        mode === "organisation"
+          ? `https://api.github.com/orgs/${searchTerm}/repos`
+          : `https://api.github.com/users/${searchTerm}/repos`;
 
-    setUrl(url);
+      setError("");
+      setUrl(url);
+    }
   };
 
   return (
@@ -33,14 +41,18 @@ export const SearchForm = ({ setUrl }) => {
       <Stack gap={3}>
         <ButtonGroup aria-label="Basic example">
           <Button
-            variant="secondary"
+            variant={classNames("secondary", {
+              active: mode === "organisation",
+            })}
             name="organisation"
             onClick={handleButtonGroupClick}
           >
             Search by organisation
           </Button>
           <Button
-            variant="secondary"
+            variant={classNames("secondary", {
+              active: mode === "username",
+            })}
             name="username"
             onClick={handleButtonGroupClick}
           >
@@ -55,9 +67,7 @@ export const SearchForm = ({ setUrl }) => {
             value={searchTerm}
             onChange={handleOnChange}
           />
-          <Form.Text className="text-danger">
-            Please enter a valid organisation
-          </Form.Text>
+          {error && <Form.Text className="text-danger">{error}</Form.Text>}
         </Form.Group>
 
         <Button variant="success" type="submit">
